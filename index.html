@@ -1,0 +1,294 @@
+<!DOCTYPE html> <!-- Declara que este documento es HTML5 -->
+<html lang="es"> <!-- Inicio del documento HTML con idioma español -->
+<head>
+    <!-- Metadatos básicos -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres -->
+    <title>Guía JavaScript - Frontend & Backend</title> <!-- Título de la página -->
+    <style>
+        /* Reset básico de CSS para eliminar márgenes y padding predeterminados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Hace que padding y border se incluyan en el ancho total */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define la familia de fuentes */
+        }
+
+        /* Estilo del body con un fondo suave y padding general */
+        body {
+            background-color: #f0f2f5; /* Color de fondo gris claro */
+            padding: 20px; /* Espaciado alrededor de todo el contenido */
+        }
+
+        /* Contenedor principal que centra y limita el ancho del contenido */
+        .container {
+            max-width: 1200px; /* Ancho máximo del contenido */
+            margin: 0 auto; /* Centra el contenedor horizontalmente */
+        }
+
+        /* Estilos del encabezado principal */
+        header {
+            background: #2c3e50; /* Color de fondo oscuro */
+            color: white; /* Texto en blanco */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 10px; /* Esquinas redondeadas */
+            margin-bottom: 20px; /* Espacio debajo del header */
+            text-align: center; /* Centra el texto */
+        }
+
+        /* Contenedor de las pestañas de navegación */
+        .tabs {
+            display: flex; /* Organiza las pestañas en línea */
+            gap: 10px; /* Espacio entre pestañas */
+            margin-bottom: 20px; /* Espacio debajo de las pestañas */
+        }
+
+        /* Estilo individual de cada pestaña */
+        .tab {
+            padding: 10px 20px; /* Espaciado interno */
+            background: #34495e; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Esquinas redondeadas */
+            cursor: pointer; /* Cursor tipo mano al hover */
+            transition: background 0.3s; /* Animación suave del color de fondo */
+        }
+
+        /* Estilo de la pestaña activa */
+        .tab.active {
+            background: #2980b9; /* Color de fondo más claro para la pestaña activa */
+        }
+
+        /* Contenedor de contenido oculto por defecto */
+        .content {
+            display: none; /* Oculta el contenido */
+        }
+
+        /* Contenido visible cuando está activo */
+        .content.active {
+            display: block; /* Muestra el contenido */
+        }
+
+        /* Estilo de las secciones de contenido */
+        .section {
+            background: white; /* Fondo blanco */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 10px; /* Esquinas redondeadas */
+            margin-bottom: 20px; /* Espacio entre secciones */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra suave */
+        }
+
+        /* Estilo base para las tarjetas de librerías */
+        .library {
+            border-left: 4px solid; /* Borde izquierdo para identificación visual */
+            padding: 15px; /* Espaciado interno */
+            margin: 10px 0; /* Margen vertical */
+            background: #f8f9fa; /* Fondo gris muy claro */
+        }
+
+        /* Estilos específicos para frontend */
+        .frontend-lib {
+            border-color: #e74c3c; /* Borde rojo para frontend */
+        }
+
+        .frontend-header {
+            background: #c0392b; /* Fondo rojo oscuro */
+            color: white; /* Texto blanco */
+            padding: 10px; /* Espaciado interno */
+            border-radius: 5px; /* Esquinas redondeadas */
+        }
+
+        /* Estilos específicos para backend */
+        .backend-lib {
+            border-color: #27ae60; /* Borde verde para backend */
+        }
+
+        .backend-header {
+            background: #2ecc71; /* Fondo verde */
+            color: white; /* Texto blanco */
+            padding: 10px; /* Espaciado interno */
+            border-radius: 5px; /* Esquinas redondeadas */
+        }
+
+        /* Estilo de los títulos de tercer nivel */
+        h3 {
+            margin: 10px 0; /* Margen vertical */
+            color: #2c3e50; /* Color azul oscuro */
+        }
+
+        /* Sección de "cuándo usar" */
+        .when-to-use {
+            margin-top: 10px; /* Espacio superior */
+            padding: 10px; /* Espaciado interno */
+            background: #ecf0f1; /* Fondo gris muy claro */
+            border-radius: 5px; /* Esquinas redondeadas */
+        }
+
+        /* Estilo base para las etiquetas de dificultad */
+        .tag {
+            display: inline-block; /* Permite que estén en línea pero con dimensiones de bloque */
+            padding: 3px 8px; /* Espaciado interno */
+            border-radius: 3px; /* Esquinas redondeadas */
+            font-size: 0.8em; /* Tamaño de fuente más pequeño */
+            margin-right: 5px; /* Espacio a la derecha */
+            margin-top: 5px; /* Espacio superior */
+            color: white; /* Texto blanco */
+        }
+
+        /* Colores para los diferentes niveles de dificultad */
+        .difficulty-easy { background: #2ecc71; } /* Verde para fácil */
+        .difficulty-medium { background: #f1c40f; } /* Amarillo para medio */
+        .difficulty-hard { background: #e74c3c; } /* Rojo para difícil */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado principal de la página -->
+        <header>
+            <h1>Guía Completa de JavaScript</h1>
+            <p>Frontend y Backend - Librerías y Frameworks</p>
+        </header>
+
+        <!-- Sistema de pestañas para navegación -->
+        <div class="tabs">
+            <button class="tab active" onclick="showContent('frontend')">Frontend</button>
+            <button class="tab" onclick="showContent('backend')">Backend</button>
+        </div>
+
+        <!-- Contenido de la sección Frontend -->
+        <div id="frontend" class="content active">
+            <div class="section">
+                <div class="frontend-header">
+                    <h2>Frontend Frameworks y Librerías</h2>
+                </div>
+
+                <!-- Tarjeta de React -->
+                <div class="library frontend-lib">
+                    <h3>React</h3>
+                    <p>Librería para construir interfaces de usuario mantenida por Facebook.</p>
+                    <div class="tag difficulty-medium">Dificultad: Media</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>Aplicaciones grandes y escalables</li>
+                            <li>Cuando necesitas un ecosistema robusto</li>
+                            <li>Para equipos grandes</li>
+                            <li>Aplicaciones de una sola página (SPA)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Vue.js -->
+                <div class="library frontend-lib">
+                    <h3>Vue.js</h3>
+                    <p>Framework progresivo para construir interfaces de usuario.</p>
+                    <div class="tag difficulty-easy">Dificultad: Fácil</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>Proyectos pequeños a medianos</li>
+                            <li>Cuando necesitas una curva de aprendizaje suave</li>
+                            <li>Para aplicaciones progresivas</li>
+                            <li>Cuando necesitas flexibilidad</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Angular -->
+                <div class="library frontend-lib">
+                    <h3>Angular</h3>
+                    <p>Framework completo mantenido por Google.</p>
+                    <div class="tag difficulty-hard">Dificultad: Alta</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>Aplicaciones empresariales grandes</li>
+                            <li>Cuando necesitas un framework opinado</li>
+                            <li>Para equipos que prefieren TypeScript</li>
+                            <li>Aplicaciones complejas con muchas características</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido de la sección Backend -->
+        <div id="backend" class="content">
+            <div class="section">
+                <div class="backend-header">
+                    <h2>Backend Frameworks y Librerías</h2>
+                </div>
+
+                <!-- Tarjeta de Express.js -->
+                <div class="library backend-lib">
+                    <h3>Express.js</h3>
+                    <p>Framework web rápido y minimalista para Node.js</p>
+                    <div class="tag difficulty-easy">Dificultad: Fácil</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>APIs REST simples</li>
+                            <li>Aplicaciones web pequeñas a medianas</li>
+                            <li>Cuando necesitas flexibilidad</li>
+                            <li>Prototipos rápidos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Nest.js -->
+                <div class="library backend-lib">
+                    <h3>Nest.js</h3>
+                    <p>Framework progresivo para construir aplicaciones del lado del servidor.</p>
+                    <div class="tag difficulty-hard">Dificultad: Alta</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>Aplicaciones empresariales</li>
+                            <li>Proyectos que requieren arquitectura escalable</li>
+                            <li>Cuando trabajas con TypeScript</li>
+                            <li>Aplicaciones monolíticas grandes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Sequelize -->
+                <div class="library backend-lib">
+                    <h3>Sequelize</h3>
+                    <p>ORM para Node.js que soporta múltiples bases de datos SQL.</p>
+                    <div class="tag difficulty-medium">Dificultad: Media</div>
+                    <div class="when-to-use">
+                        <strong>Cuándo usar:</strong>
+                        <ul>
+                            <li>Proyectos que requieren base de datos SQL</li>
+                            <li>Cuando necesitas migraciones de base de datos</li>
+                            <li>Para abstraer consultas SQL complejas</li>
+                            <li>Aplicaciones con múltiples modelos de datos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para manejar la funcionalidad de las pestañas -->
+    <script>
+        // Función para mostrar el contenido seleccionado
+        function showContent(contentId) {
+            // Oculta todos los contenidos
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Desactiva todos los tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Muestra el contenido seleccionado
+            document.getElementById(contentId).classList.add('active');
+            
+            // Activa el tab seleccionado
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
